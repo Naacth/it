@@ -11,7 +11,7 @@ class Page extends BaseController
 
     public function contact()
     {
-        $data = ["name"=>"nyompok"];
+        $data = ["name"=>"Benerin Bugnya Woi"];
         echo view("contact", $data);
     }
 
