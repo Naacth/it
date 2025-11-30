@@ -78,7 +78,7 @@
                 <button type="submit" id="submitBtn">Masuk Sekarang</button>
             </form>
             <div class="login-meta">
-                <span>Butuh bantuan? Hubungi IT desk.</span>
+                <span>Butuh bantuan?gak Hubungi IT desk.</span>
                 <span>Versi 2.0</span>
             </div>
         </section>
