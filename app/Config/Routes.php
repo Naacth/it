@@ -13,6 +13,8 @@ $routes->get('/news', 'News::index');
 $routes->get('/news/(:any)', 'News::viewNews/$1');
 $routes->get('/pegawai', 'Pegawai::index');
 $routes->get('/pegawai/divisi/(:segment)', 'Pegawai::divisi/$1');
+// Detail pegawai frontend
+$routes->get('/pegawai/(:num)', 'Pegawai::detail/$1');
 
 $routes->get('/login', 'Auth::login');
 $routes->post('/login', 'Auth::attempt');

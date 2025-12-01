@@ -20,9 +20,6 @@
                     <a href="<?= base_url('admin/news/new') ?>" class="btn btn-primary mr-2">New Post</a>
                 </li>
                 <li class="nav-item">
-                    <a href="<?= base_url('admin/pegawai/new') ?>" class="btn btn-primary mr-3">Tambah Pegawai</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" href="<?= base_url('admin/setting') ?>">Setting</a>
                 </li>
                 <li class="nav-item">

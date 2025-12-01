@@ -38,6 +38,20 @@ class Pegawai extends BaseController
         
         echo view('pegawai_divisi', $data);
     }
+
+    public function detail($id)
+    {
+        $pegawaiModel = new PegawaiModel();
+        $pegawai = $pegawaiModel->find($id);
+
+        if (!$pegawai) {
+            throw PageNotFoundException::forPageNotFound('Pegawai tidak ditemukan');
+        }
+
+        $data['pegawai'] = $pegawai;
+
+        echo view('pegawai_detail', $data);
+    }
 }
 
 

@@ -283,8 +283,13 @@
                             </span>
                         </div>
                     </div>
-                    <div>
+                    <div class="d-flex justify-content-between align-items-center">
                         <span class="pegawai-divisi-badge"><?= esc($p['divisi']) ?></span>
+                        <?php if (!empty($p['id_pegawai'])): ?>
+                            <a href="<?= base_url('pegawai/' . $p['id_pegawai']) ?>" class="btn btn-sm btn-outline-primary">
+                                Detail
+                            </a>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
