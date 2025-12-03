@@ -149,6 +149,33 @@
     box-shadow: 0 4px 12px rgba(127, 91, 255, 0.25);
 }
 
+.btn-detail-pegawai {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.5rem 1rem;
+    background: var(--card-bg);
+    color: var(--accent);
+    border: 2px solid var(--accent);
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 0.875rem;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.btn-detail-pegawai:hover {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
+    color: white;
+    text-decoration: none;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(127, 91, 255, 0.3);
+}
+
+.btn-detail-pegawai svg {
+    flex-shrink: 0;
+}
+
 .empty-state {
     text-align: center;
     padding: 4rem 2rem;
@@ -176,9 +203,155 @@
     font-size: 1.1rem;
 }
 
+/* Search and Filter Styles */
+.search-filter-card {
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--border-color);
+}
+
+.search-filter-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 1.25rem;
+    color: var(--text-primary);
+}
+
+.search-filter-header svg {
+    color: var(--accent);
+}
+
+.form-label-custom {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+}
+
+.form-label-custom svg {
+    flex-shrink: 0;
+    opacity: 0.7;
+}
+
+.form-control-custom {
+    width: 100%;
+    padding: 0.875rem 1rem;
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    background: var(--bg-primary);
+    transition: all 0.2s ease;
+    font-family: inherit;
+}
+
+.form-control-custom:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px rgba(127, 91, 255, 0.1);
+}
+
+.form-control-custom::placeholder {
+    color: var(--text-muted);
+    opacity: 0.7;
+}
+
+.search-filter-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.btn-search {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.875rem 2rem;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 12px rgba(127, 91, 255, 0.3);
+}
+
+.btn-search:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(127, 91, 255, 0.4);
+}
+
+.btn-search:active {
+    transform: translateY(0);
+}
+
+.btn-reset {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.875rem 1.5rem;
+    background: var(--bg-secondary);
+    color: var(--text-secondary);
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+    font-weight: 500;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.btn-reset:hover {
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+    text-decoration: none;
+    border-color: var(--text-muted);
+}
+
+.filter-count {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    background: linear-gradient(135deg, rgba(127, 91, 255, 0.1) 0%, rgba(168, 85, 247, 0.1) 100%);
+    color: var(--accent);
+    border-radius: 50px;
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
 @media (max-width: 768px) {
     .pegawai-header h1 {
         font-size: 2rem;
+    }
+    
+    .search-filter-card {
+        padding: 1.5rem;
+    }
+    
+    .search-filter-header {
+        font-size: 1.1rem;
+    }
+    
+    .btn-search, .btn-reset {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .filter-count {
+        width: 100%;
+        justify-content: center;
     }
     
     .divisi-tabs .nav-pills .nav-link {
@@ -190,6 +363,12 @@
         width: 120px;
         height: 120px;
     }
+    
+    .pegawai-name {
+        font-size: 1.15rem;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
 }
 </style>
 
@@ -197,6 +376,77 @@
     <div class="pegawai-header">
         <h1>Data Pegawai</h1>
         <p>Daftar pegawai berdasarkan divisi</p>
+    </div>
+
+    <!-- Search and Filter Form -->
+    <div class="search-filter-card mb-4">
+        <div class="search-filter-header">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"></circle>
+                <path d="m21 21-4.35-4.35"></path>
+            </svg>
+            <span>Pencarian & Filter</span>
+        </div>
+        <form method="get" action="<?= base_url('pegawai') ?>" id="searchFilterForm">
+            <div class="row g-3">
+                <div class="col-12 col-lg-8">
+                    <label for="search" class="form-label-custom">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.35-4.35"></path>
+                        </svg>
+                        Pencarian
+                    </label>
+                    <input type="text" 
+                           class="form-control-custom" 
+                           id="search" 
+                           name="search" 
+                           placeholder="Cari nama, divisi, jenis kelamin, tanggal lahir..." 
+                           value="<?= esc($search) ?>">
+                </div>
+                <div class="col-12 col-lg-4">
+                    <label for="jenis_kelamin" class="form-label-custom">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                        Jenis Kelamin
+                    </label>
+                    <select class="form-control-custom" id="jenis_kelamin" name="jenis_kelamin">
+                        <option value="">Semua</option>
+                        <option value="laki-laki" <?= $jenisKelaminFilter === 'laki-laki' ? 'selected' : '' ?>>Laki-laki</option>
+                        <option value="perempuan" <?= $jenisKelaminFilter === 'perempuan' ? 'selected' : '' ?>>Perempuan</option>
+                    </select>
+                </div>
+            </div>
+            <div class="search-filter-actions">
+                <button type="submit" class="btn-search">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                    </svg>
+                    Cari
+                </button>
+                <?php if (!empty($search) || !empty($jenisKelaminFilter)): ?>
+                    <a href="<?= base_url('pegawai') ?>" class="btn-reset">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="1 4 1 10 7 10"></polyline>
+                            <polyline points="23 20 23 14 17 14"></polyline>
+                            <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"></path>
+                        </svg>
+                        Reset
+                    </a>
+                    <span class="filter-count">
+                        <?php 
+                        $filterCount = 0;
+                        if (!empty($search)) $filterCount++;
+                        if (!empty($jenisKelaminFilter)) $filterCount++;
+                        echo $filterCount . ' filter aktif';
+                        ?>
+                    </span>
+                <?php endif; ?>
+            </div>
+        </form>
     </div>
 
     <!-- Menu Divisi -->
@@ -281,7 +531,11 @@
                             <div class="d-flex justify-content-between align-items-center">
                                 <span class="pegawai-divisi-badge"><?= esc($pegawai['divisi']) ?></span>
                                 <?php if (!empty($pegawai['id_pegawai'])): ?>
-                                    <a href="<?= base_url('pegawai/' . $pegawai['id_pegawai']) ?>" class="btn btn-sm btn-outline-primary">
+                                    <a href="<?= base_url('pegawai/' . $pegawai['id_pegawai']) ?>" class="btn-detail-pegawai">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                            <circle cx="12" cy="12" r="3"></circle>
+                                        </svg>
                                         Detail
                                     </a>
                                 <?php endif; ?>

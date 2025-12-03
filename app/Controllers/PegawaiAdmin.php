@@ -11,16 +11,22 @@ class PegawaiAdmin extends BaseController
     {
         $pegawaiModel = new PegawaiModel();
         
-        // Filter by divisi if provided
+        // Get search and filter parameters
+        $search = $this->request->getGet('search');
         $divisi = $this->request->getGet('divisi');
-        if ($divisi && in_array($divisi, $pegawaiModel->getAllDivisi())) {
-            $data['pegawai'] = $pegawaiModel->getByDivisi($divisi);
+        $jenisKelamin = $this->request->getGet('jenis_kelamin');
+        
+        // Apply search and filters
+        if (!empty($search) || !empty($divisi) || !empty($jenisKelamin)) {
+            $data['pegawai'] = $pegawaiModel->searchAndFilter($search, $divisi, $jenisKelamin);
         } else {
             $data['pegawai'] = $pegawaiModel->findAll();
         }
         
         $data['divisiList'] = $pegawaiModel->getAllDivisi();
         $data['currentDivisi'] = $divisi ?? '';
+        $data['currentJenisKelamin'] = $jenisKelamin ?? '';
+        $data['search'] = $search ?? '';
         
         echo view('admin_list_pegawai', $data);
     }

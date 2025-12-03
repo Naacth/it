@@ -11,13 +11,34 @@ class Pegawai extends BaseController
     {
         $pegawaiModel = new PegawaiModel();
         
-        // Get all pegawai grouped by divisi
-        $data['divisiList'] = $pegawaiModel->getAllDivisi();
-        $data['pegawaiByDivisi'] = [];
+        // Get search and filter parameters
+        $search = $this->request->getGet('search');
+        $divisiFilter = $this->request->getGet('divisi');
+        $jenisKelaminFilter = $this->request->getGet('jenis_kelamin');
         
-        foreach ($data['divisiList'] as $divisi) {
-            $data['pegawaiByDivisi'][$divisi] = $pegawaiModel->getByDivisi($divisi);
+        // Get all pegawai with search and filter
+        if (!empty($search) || !empty($divisiFilter) || !empty($jenisKelaminFilter)) {
+            $allPegawai = $pegawaiModel->searchAndFilter($search, $divisiFilter, $jenisKelaminFilter);
+            
+            // Group by divisi
+            $data['pegawaiByDivisi'] = [];
+            foreach ($pegawaiModel->getAllDivisi() as $divisi) {
+                $data['pegawaiByDivisi'][$divisi] = array_filter($allPegawai, function($p) use ($divisi) {
+                    return $p['divisi'] === $divisi;
+                });
+            }
+        } else {
+            // Get all pegawai grouped by divisi
+            $data['pegawaiByDivisi'] = [];
+            foreach ($pegawaiModel->getAllDivisi() as $divisi) {
+                $data['pegawaiByDivisi'][$divisi] = $pegawaiModel->getByDivisi($divisi);
+            }
         }
+        
+        $data['divisiList'] = $pegawaiModel->getAllDivisi();
+        $data['search'] = $search ?? '';
+        $data['divisiFilter'] = $divisiFilter ?? '';
+        $data['jenisKelaminFilter'] = $jenisKelaminFilter ?? '';
         
         echo view('pegawai', $data);
     }

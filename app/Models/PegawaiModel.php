@@ -65,6 +65,40 @@ class PegawaiModel extends Model
     {
         return ['IT', 'Marketing', 'HR', 'Operasional'];
     }
+
+    /**
+     * Search and filter pegawai
+     * @param string|null $search Search keyword
+     * @param string|null $divisi Filter by divisi
+     * @param string|null $jenisKelamin Filter by jenis kelamin
+     * @return array
+     */
+    public function searchAndFilter(?string $search = null, ?string $divisi = null, ?string $jenisKelamin = null): array
+    {
+        $builder = $this->builder();
+
+        // Apply search across all columns
+        if (!empty($search)) {
+            $builder->groupStart()
+                ->like('nama_pegawai', $search)
+                ->orLike('jenis_kelamin', $search)
+                ->orLike('divisi', $search)
+                ->orLike('tanggal_lahir', $search)
+                ->groupEnd();
+        }
+
+        // Filter by divisi
+        if (!empty($divisi) && in_array($divisi, $this->getAllDivisi())) {
+            $builder->where('divisi', $divisi);
+        }
+
+        // Filter by jenis kelamin
+        if (!empty($jenisKelamin) && in_array($jenisKelamin, ['laki-laki', 'perempuan'])) {
+            $builder->where('jenis_kelamin', $jenisKelamin);
+        }
+
+        return $builder->get()->getResultArray();
+    }
 }
 
 
